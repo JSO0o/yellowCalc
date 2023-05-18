@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>계산기</title>
+</head>
+<!--https://blog.cordelia273.space/32 참고-->
+
+<body><!--colspan은 열을 (가로방향으로) 합쳐주고)// rowspan은 행을 (세로 방향으로) 합쳐줌)-->
+    <table border="1">
+        <tr class="one">
+            <td colspan="4">
+                <input type="text" id="display">
+            </td>
+        </tr>
+        <tr class="two">
+            <td colspan="4">
+                <input type="text" id="result">
+            </td>
+        </tr>
+        <tr class="three">
+            <td colspan="3" onclick="reset()" class="AC">AC</td>
+            <td onclick="add('/')" class="and">/</td> <!--테이블에 숫자와 연산자에 해당하는 td에 onclick 속성을 부여해서 add() 함수를 호출하게 함-->
+        </tr>
+        <tr class="four">
+            <td onclick="add(7)">7</td>
+            <td onclick="add(8)">8</td>
+            <td onclick="add(9)">9</td>
+            <td onclick="add('*')" class="multi">*</td>
+        </tr>
+        <tr class="five">
+            <td onclick="add(4)">4</td>
+            <td onclick="add(5)">5</td>
+            <td onclick="add(6)">6</td>
+            <td onclick="add('-')" class="minus">-</td>
+        </tr>
+        <tr class="six">
+            <td onclick="add(1)">1</td>
+            <td onclick="add(2)">2</td>
+            <td onclick="add(3)">3</td>
+            <td onclick="add('+')" class="plus">+</td>
+        </tr>
+        <tr class="seven">
+            <td colspan="2" onclick="add(0)">0</td>
+            <td onclick="add('.')">.</td>
+            <td onclick="calculate()" class="same">=</td>
+        </tr>
+    </table>
+
+    <script>
+        //html의 onclick 속성은 모든 태그에 적용될 수 있다. 
+        //onclick 속성은 그 속성이 적용된 요소를 클릭 했을 때 일어나는 일을 나타낸다.
+
+        function add(char) {
+            var display = document.getElementById('display'); // 우리가 식을 입력할 input 태그를 불러옴
+            // display.value는 input 태그 안에 들어 있는 값을 의미
+            display.value = display.value + char;
+            // display.value += char; 로 쓸 수도 있음
+            // input 태그의 값 뒤에 char 문자를 추가해 주는 역할
+        }
+
+
+        //eval 함수는 javascript에 내장된 함수로, 식을 입력 받으면 그 식을 계산해서 결과를 알려줌
+        function calculate() {
+            var display = document.getElementById('display');
+            var result = eval(display.value); // 식을 계산하고 result 변수에 저장합니다.
+            document.getElementById('result').value = result;
+        }
+        //"AC"를 눌렀을 때 식과 계산 결과가 전부 초기화
+        function reset() {
+            document.getElementById('display').value = "";
+            document.getElementById('result').value = "";
+        }
+
+
+    </script>
+</body>
+
+</html>
